@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import {View, StyleSheet} from "react-native";
 import { Text, Input, Button } from '@rneui/themed';
 import Spacer from "../components/Spacer";
 
 const SignupScreen = ({navigation}) => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     return(
         <View style={styles.container}>
@@ -17,12 +20,25 @@ const SignupScreen = ({navigation}) => {
 
             <Input
                 label="Email"
+                value={email}
+                onChangeText={(newEmail) => {
+                    setEmail(newEmail);
+                }}
+                autoCapitalize="none"
+                autoCorrect={false}
             />
 
             <Spacer/>
 
             <Input
+                secureTextEntry
                 label="Password"
+                value={password}
+                onChangeText={(newPassword) => {
+                    setPassword(newPassword);
+                }}
+                autoCapitalize="none"
+                autoCorrect={false}
             />
 
             <Spacer>
