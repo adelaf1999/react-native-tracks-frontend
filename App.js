@@ -20,7 +20,8 @@ function AuthStack() {
 
         <Stack.Navigator
             screenOptions={{
-                headerTitle: ""
+                headerTitle: "",
+                headerShown: false
             }}
         >
 
