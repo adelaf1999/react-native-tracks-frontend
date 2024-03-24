@@ -11,6 +11,7 @@ import SignupScreen from "./src/screens/SignupScreen";
 import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
+import {Provider as AuthProvider} from "./src/context/AuthContext";
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -88,34 +89,40 @@ function AppTabs() {
 
 export default function App() {
     return (
-        <NavigationContainer>
 
-            <Stack.Navigator
-                screenOptions={{
-                    animationEnabled: false,
-                    headerShown: false
-                }}
-                initialRouteName="Auth"
-            >
+        <AuthProvider>
 
-                <Stack.Screen
-                    name="Auth"
-                    component={AuthStack}
-                    options={{
+            <NavigationContainer>
+
+                <Stack.Navigator
+                    screenOptions={{
+                        animationEnabled: false,
                         headerShown: false
                     }}
-                />
+                    initialRouteName="Auth"
+                >
 
-                <Stack.Screen
-                    name="App"
-                    component={AppTabs}
-                    options={{
-                        headerShown: false
-                    }}
-                />
+                    <Stack.Screen
+                        name="Auth"
+                        component={AuthStack}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
 
-            </Stack.Navigator>
+                    <Stack.Screen
+                        name="App"
+                        component={AppTabs}
+                        options={{
+                            headerShown: false
+                        }}
+                    />
 
-        </NavigationContainer>
+                </Stack.Navigator>
+
+            </NavigationContainer>
+
+        </AuthProvider>
+
     );
 }
