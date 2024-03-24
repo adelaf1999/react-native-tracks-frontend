@@ -9,8 +9,40 @@ const authReducer = (state, action) => {
 
 };
 
+const signup = (dispatch) => {
+
+    return ({email, password}) => {
+
+
+
+    };
+
+};
+
+
+const signin = (dispatch) => {
+
+    return({email, password}) => {
+
+    };
+
+};
+
+
+const signout = (dispatch) => {
+
+    return () => {
+
+    };
+
+};
+
 export const {Provider, Context} = createDataContext(
     authReducer,
-    {},
+    {
+        signup,
+        signin,
+        signout
+    },
     {isSignedIn: false}
 );
