@@ -1,13 +1,24 @@
 import createDataContext from "./createDataContext";
 import trackerApi from "../api/tracker";
+import * as SecureStore from 'expo-secure-store';
+
+const INITIAL_STATE = {
+    token: null,
+    errorMessage: ''
+};
 
 const authReducer = (state, action) => {
 
     switch(action.type){
+        case 'signup':
+            return{
+                ...state,
+                token: action.payload
+            };
         case 'add_error':
             return{
-              ...state,
-              errorMessage: action.payload
+                ...state,
+                errorMessage: action.payload
             };
         default:
             return state;
@@ -21,9 +32,15 @@ const signup = (dispatch) => {
 
         try{
 
+            dispatch({type: 'add_error', payload: ''});
+
             const response = await trackerApi.post("/signup", {email, password});
 
-            console.log(response.data);
+            const token = response.data.token;
+
+            await SecureStore.setItemAsync('token', token);
+
+            dispatch({type: 'signup', payload: token});
 
         }catch(err){
 
@@ -53,6 +70,7 @@ const signout = (dispatch) => {
 
 };
 
+
 export const {Provider, Context} = createDataContext(
     authReducer,
     {
@@ -60,5 +78,5 @@ export const {Provider, Context} = createDataContext(
         signin,
         signout
     },
-    {isSignedIn: false, errorMessage: ''}
+    INITIAL_STATE
 );
