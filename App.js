@@ -12,6 +12,9 @@ import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
 import {Provider as AuthProvider} from "./src/context/AuthContext";
+import { navigationRef } from './src/RootNavigation';
+
+
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -39,7 +42,7 @@ function TracksStack() {
     return (
 
         <Stack.Navigator
-            initialRouteName="TracksList"
+            initialRouteName="TrackList"
         >
 
             <Stack.Screen
@@ -74,6 +77,7 @@ function TracksStack() {
 function AppTabs() {
     return (
         <Tab.Navigator
+            initialRouteName="Tracks"
         >
 
             <Tab.Screen name="Tracks" component={TracksStack} />
@@ -88,11 +92,15 @@ function AppTabs() {
 }
 
 export default function App() {
+
+
     return (
 
         <AuthProvider>
 
-            <NavigationContainer>
+            <NavigationContainer
+                ref={navigationRef}
+            >
 
                 <Stack.Navigator
                     screenOptions={{
