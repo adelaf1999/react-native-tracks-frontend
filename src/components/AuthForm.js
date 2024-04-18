@@ -14,7 +14,7 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
         <>
 
             <Spacer>
-                <Text h3>Sign Up for Tracker</Text>
+                <Text h3>{headerText}</Text>
             </Spacer>
 
             <Spacer/>
@@ -44,14 +44,14 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
             />
 
             {
-                state.errorMessage ?  <Text style={styles.errorMessage}>{state.errorMessage}</Text> : null
+                errorMessage ?  <Text style={styles.errorMessage}>{errorMessage}</Text> : null
             }
 
             <Spacer>
                 <Button
-                    title="Sign Up"
+                    title={submitButtonText}
                     onPress={() => {
-                        signup({email, password});
+                        onSubmit({email, password});
                     }}
                 />
             </Spacer>
@@ -62,6 +62,13 @@ const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
 
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    errorMessage: {
+        fontSize: 16,
+        color: 'red',
+        margin: 15,
+        textAlign: 'center'
+    }
+});
 
 export default AuthForm;
