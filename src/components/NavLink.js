@@ -11,7 +11,7 @@ const NavLink = ({text, routeName}) => {
 
         <TouchableOpacity
             onPress={() => {
-                navigation.navigate('Signin');
+                navigation.navigate(routeName);
             }}
         >
             <Spacer>
