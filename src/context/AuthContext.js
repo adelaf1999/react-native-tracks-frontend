@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 const authReducer = (state, action) => {
 
     switch(action.type){
-        case 'signup':
+        case 'signin':
             return{
                 ...state,
                 token: action.payload
@@ -43,7 +43,7 @@ const signup = (dispatch) => {
 
             await SecureStore.setItemAsync('token', token);
 
-            dispatch({type: 'signup', payload: token});
+            dispatch({type: 'signin', payload: token});
 
             RootNavigation.navigate('App');
 
@@ -64,7 +64,33 @@ const signup = (dispatch) => {
 
 const signin = (dispatch) => {
 
-    return({email, password}) => {
+    return async ({email, password}) => {
+
+        try{
+
+            dispatch({type: 'add_error', payload: ''});
+
+            const response = await trackerApi.post('/signin', {email, password});
+
+            const token = response.data.token;
+
+            await SecureStore.setItemAsync('token', token);
+
+            dispatch({type: 'signin', payload: token});
+
+            RootNavigation.navigate('App');
+
+
+        }catch(err){
+
+            console.log(err);
+
+            dispatch({
+                type: 'add_error',
+                payload: 'Something went wrong with sign in'
+            });
+
+        }
 
     };
 
