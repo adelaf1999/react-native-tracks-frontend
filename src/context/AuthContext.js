@@ -27,6 +27,11 @@ const authReducer = (state, action) => {
               ...state,
               errorMessage: ''
             };
+        case 'signout':
+            return{
+              ...state,
+              ...INITIAL_STATE
+            };
         default:
             return state;
     }
@@ -133,7 +138,13 @@ const signin = (dispatch) => {
 
 const signout = (dispatch) => {
 
-    return () => {
+    return async () => {
+
+        await SecureStore.deleteItemAsync('token');
+
+        dispatch({type: 'signout'})
+
+        RootNavigation.navigate('Auth');
 
     };
 
