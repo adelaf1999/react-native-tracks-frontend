@@ -6,9 +6,12 @@ import NavLink from "../components/NavLink";
 
 const SignupScreen = ({navigation}) => {
 
-    const {state, signup, clearErrorMessage} = useContext(AuthContext);
+    const {state, signup, clearErrorMessage, tryLocalSignIn} = useContext(AuthContext);
 
     useEffect(() => {
+
+        tryLocalSignIn();
+
         const unsubscribe = navigation.addListener("blur", () => {
             clearErrorMessage();
         });

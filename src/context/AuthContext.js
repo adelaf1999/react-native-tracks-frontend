@@ -33,6 +33,28 @@ const authReducer = (state, action) => {
 
 };
 
+const tryLocalSignIn = (dispatch) => {
+
+    return async  () => {
+
+        const token = await SecureStore.getItemAsync('token');
+
+        if(token){
+
+            dispatch({type: 'signin', payload: token});
+
+            RootNavigation.navigate('App');
+
+        }else{
+
+            RootNavigation.navigate('Auth');
+
+        }
+
+    };
+
+};
+
 const clearErrorMessage = (dispatch) => {
 
     return () => {
@@ -124,7 +146,8 @@ export const {Provider, Context} = createDataContext(
         signup,
         signin,
         signout,
-        clearErrorMessage
+        clearErrorMessage,
+        tryLocalSignIn
     },
     INITIAL_STATE
 );
