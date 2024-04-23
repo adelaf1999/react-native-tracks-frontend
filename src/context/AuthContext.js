@@ -4,7 +4,6 @@ import * as SecureStore from 'expo-secure-store';
 import * as RootNavigation from '../RootNavigation';
 
 
-
 const INITIAL_STATE = {
     token: null,
     errorMessage: ''
@@ -23,9 +22,22 @@ const authReducer = (state, action) => {
                 ...state,
                 errorMessage: action.payload
             };
+        case 'clear_error_message':
+            return{
+              ...state,
+              errorMessage: ''
+            };
         default:
             return state;
     }
+
+};
+
+const clearErrorMessage = (dispatch) => {
+
+    return () => {
+        dispatch({type: 'clear_error_message'});
+    };
 
 };
 
@@ -111,7 +123,8 @@ export const {Provider, Context} = createDataContext(
     {
         signup,
         signin,
-        signout
+        signout,
+        clearErrorMessage
     },
     INITIAL_STATE
 );
