@@ -11,21 +11,21 @@ const TrackCreateScreen = () => {
 
     const startWatching = async () => {
 
-        try{
+        let { status } = await Location.requestForegroundPermissionsAsync();
 
-            await Location.requestForegroundPermissionsAsync();
-
-
-        }catch(e){
-
-            setErr(e);
-
+        if (status !== 'granted') {
+            setErr('Permission to access location was denied');
+            return;
         }
 
     };
 
-    useEffect(() => {
-        startWatching();
+    useEffect( () => {
+
+        (async () => {
+            await startWatching();
+        })();
+
     }, []);
 
     return(
