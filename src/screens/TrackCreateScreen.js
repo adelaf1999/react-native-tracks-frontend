@@ -20,6 +20,15 @@ const TrackCreateScreen = () => {
             return;
         }
 
+        await Location.watchPositionAsync({
+            accuracy: Location.Accuracy.BestForNavigation,
+            timeInterval: 1000,
+            distanceInterval: 10,
+
+        }, (location) => {
+            console.log(location);
+        })
+
     };
 
     useEffect( () => {
