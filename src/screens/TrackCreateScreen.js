@@ -1,4 +1,4 @@
-import '../_mockLocation';
+// import '../_mockLocation'; // For test purposes only
 
 import React, {useEffect, useState} from "react";
 import { StyleSheet} from "react-native";
@@ -26,6 +26,7 @@ const TrackCreateScreen = () => {
             distanceInterval: 10,
 
         }, (location) => {
+            console.log("watch position");
             console.log(location);
         })
 
