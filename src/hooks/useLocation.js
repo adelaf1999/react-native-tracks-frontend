@@ -1,9 +1,11 @@
 import {useEffect, useState} from "react";
 import * as Location from 'expo-location';
 
-export default (callback) => {
+export default (shouldTrack, callback) => {
 
     const [err, setErr] = useState(null);
+
+    const [subscriber, setSubscriber] = useState(null);
 
     const startWatching = async () => {
 
@@ -14,22 +16,36 @@ export default (callback) => {
             return;
         }
 
-        await Location.watchPositionAsync({
+        const sub = await Location.watchPositionAsync({
             accuracy: Location.Accuracy.BestForNavigation,
             timeInterval: 1000,
             distanceInterval: 10,
 
         }, callback)
 
+        setSubscriber(sub);
+
     };
 
     useEffect( () => {
 
-        (async () => {
-            await startWatching();
-        })();
+        if(shouldTrack){
 
-    }, []);
+            (async () => {
+                await startWatching();
+            })();
+
+        }else{
+
+           subscriber.remove();
+
+           setSubscriber(null);
+
+        }
+
+
+
+    }, [shouldTrack]);
 
     return [err];
 
