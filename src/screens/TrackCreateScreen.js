@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import {Context as LocationContext} from "../context/LocationContext";
 import useLocation from "../hooks/useLocation";
 import { useIsFocused } from '@react-navigation/native';
+import TrackForm from "../components/TrackForm";
 
 
 const TrackCreateScreen = () => {
@@ -28,6 +29,8 @@ const TrackCreateScreen = () => {
             <Map/>
 
             {err ? <Text>Please enable location services</Text> : null}
+
+            <TrackForm/>
 
         </SafeAreaView>
     );
