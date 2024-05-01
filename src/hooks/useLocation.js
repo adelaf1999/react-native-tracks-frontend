@@ -44,8 +44,20 @@ export default (shouldTrack, callback) => {
         }
 
 
+        // cleanup function, gets called the next time useEffect runs
+        // and before any function in useEffect
+
+        return () => {
+
+            if(subscriber){
+                subscriber.remove();
+            }
+
+        };
 
     }, [shouldTrack, callback]);
+
+    // useEffect re-runs anytime shouldTrack or callback change in memory
 
     return [err];
 

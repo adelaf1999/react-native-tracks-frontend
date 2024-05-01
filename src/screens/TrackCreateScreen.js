@@ -19,6 +19,9 @@ const TrackCreateScreen = () => {
 
     const isFocused = useIsFocused();
 
+    // Returns a new function in memory only when
+    // the variables we track actually change
+
     const callback = useCallback((location) => {
         addLocation(location, recording);
     }, [recording]);
