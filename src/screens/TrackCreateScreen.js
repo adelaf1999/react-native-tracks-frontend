@@ -1,6 +1,6 @@
 import '../_mockLocation'; // For test purposes only
 
-import React, {useEffect, useState, useContext} from "react";
+import React, {useContext, useCallback} from "react";
 import { StyleSheet} from "react-native";
 import { Text } from '@rneui/themed';
 import Map from "../components/Map";
@@ -19,9 +19,11 @@ const TrackCreateScreen = () => {
 
     const isFocused = useIsFocused();
 
-    const [err] = useLocation(isFocused, (location) => {
+    const callback = useCallback((location) => {
         addLocation(location, recording);
-    });
+    }, [recording]);
+
+    const [err] = useLocation(isFocused, callback);
 
 
     return(

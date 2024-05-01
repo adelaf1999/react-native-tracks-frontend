@@ -45,7 +45,7 @@ export default (shouldTrack, callback) => {
 
 
 
-    }, [shouldTrack]);
+    }, [shouldTrack, callback]);
 
     return [err];
 
