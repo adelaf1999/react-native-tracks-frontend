@@ -14,7 +14,6 @@ const TrackForm = () => {
 
     const {name, recording, locations} = state;
 
-    console.log(locations.length);
 
     return(
         <>
@@ -42,9 +41,16 @@ const TrackForm = () => {
                         />
                 }
 
-
             </Spacer>
 
+
+            <Spacer>
+                {
+                    !recording && locations.length > 0
+                        ? <Button title="Save Recording" />
+                        : null
+                }
+            </Spacer>
 
         </>
     )

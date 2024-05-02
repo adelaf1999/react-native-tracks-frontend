@@ -14,6 +14,7 @@ import TrackListScreen from "./src/screens/TrackListScreen";
 import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 import {Provider as AuthProvider} from "./src/context/AuthContext";
 import {Provider as LocationProvider} from "./src/context/LocationContext";
+import {Provider as TrackProvider } from "./src/context/TrackContext";
 import { navigationRef } from './src/RootNavigation';
 
 
@@ -98,53 +99,59 @@ export default function App() {
 
     return (
 
-        <LocationProvider>
+        <TrackProvider>
 
-            <AuthProvider>
+            <LocationProvider>
 
-                <NavigationContainer
-                    ref={navigationRef}
-                >
+                <AuthProvider>
 
-                    <Stack.Navigator
-                        screenOptions={{
-                            animationEnabled: false,
-                            headerShown: false
-                        }}
-                        initialRouteName="ResolveAuthScreen"
+                    <NavigationContainer
+                        ref={navigationRef}
                     >
 
-                        <Stack.Screen
-                            name="ResolveAuthScreen"
-                            component={ResolveAuthScreen}
-                            options={{
+                        <Stack.Navigator
+                            screenOptions={{
+                                animationEnabled: false,
                                 headerShown: false
                             }}
-                        />
+                            initialRouteName="ResolveAuthScreen"
+                        >
 
-                        <Stack.Screen
-                            name="Auth"
-                            component={AuthStack}
-                            options={{
-                                headerShown: false
-                            }}
-                        />
+                            <Stack.Screen
+                                name="ResolveAuthScreen"
+                                component={ResolveAuthScreen}
+                                options={{
+                                    headerShown: false
+                                }}
+                            />
 
-                        <Stack.Screen
-                            name="App"
-                            component={AppTabs}
-                            options={{
-                                headerShown: false
-                            }}
-                        />
+                            <Stack.Screen
+                                name="Auth"
+                                component={AuthStack}
+                                options={{
+                                    headerShown: false
+                                }}
+                            />
 
-                    </Stack.Navigator>
+                            <Stack.Screen
+                                name="App"
+                                component={AppTabs}
+                                options={{
+                                    headerShown: false
+                                }}
+                            />
 
-                </NavigationContainer>
+                        </Stack.Navigator>
 
-            </AuthProvider>
+                    </NavigationContainer>
 
-        </LocationProvider>
+                </AuthProvider>
+
+            </LocationProvider>
+
+
+        </TrackProvider>
+
 
 
 
