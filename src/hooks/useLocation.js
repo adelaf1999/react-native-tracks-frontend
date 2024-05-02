@@ -59,16 +59,14 @@ export default (shouldTrack, callback) => {
 
         };
 
-    }, [shouldTrack, callback]);
+    }, [shouldTrack, callback, setErr]);
 
     // useEffect re-runs anytime shouldTrack or callback change in memory
 
-    // Make sure to ALWAYS add props (variables/functions that get passed from
-    // other components),
+    // Make sure to ALWAYS add props (variables and functions that get passed from
+    // other components)
     // Any state or context variables in the dependency list of useEffect
 
-    // It's fine to reference setter functions for state values
-    // in useEffect without adding to dependency list
 
     // We did not add the err variable because it's not used in the useEffect function.
 
