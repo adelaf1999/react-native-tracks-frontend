@@ -13,10 +13,6 @@ const AccountScreen = () => {
     return(
         <SafeAreaView>
 
-            <Text style={{fontSize: 48}}>
-                AccountScreen
-            </Text>
-
             <Spacer>
                 <Button
                     title="Sign Out"

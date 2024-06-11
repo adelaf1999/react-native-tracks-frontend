@@ -24,9 +24,6 @@ const TrackListScreen = ({navigation}) => {
     return(
         <>
 
-            <Text style={{fontSize: 48}}>
-                TrackListScreen
-            </Text>
 
             <FlatList
                 data={state}
