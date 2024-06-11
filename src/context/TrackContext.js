@@ -25,8 +25,11 @@ const fetchTracks = (dispatch) => {
 
 const createTrack = (dispatch) => {
 
-    return () => {
+    return (name, locations) => {
 
+        // make request to api
+
+        console.log(name, locations.length);
 
     };
 
